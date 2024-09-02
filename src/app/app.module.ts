@@ -8,20 +8,18 @@ import { AppComponent } from './app.component';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { InMemoryContactsApi } from './contacts/in-memory-contacts.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ContactListComponent,
-    EditContactComponent
-  ],
+  declarations: [AppComponent, ContactListComponent, EditContactComponent],
   imports: [
+    ReactiveFormsModule,//使用reactive form第一步
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryContactsApi, { delay: 200 })
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryContactsApi, { delay: 200 }),
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
