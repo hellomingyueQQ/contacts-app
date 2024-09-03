@@ -41,10 +41,11 @@ export class EditContactComponent implements OnInit {
   }
 
   saveContact() {
-    // 从formgroup的controls array里面获取formcontrol
-    console.log(this.contactForm.controls.firstName.value);
-    console.log(this.contactForm.controls.lastName.value);
-    console.log(this.contactForm.controls.dateOfBirth.value);
-    console.log(this.contactForm.controls.favoritesRanking.value);
+    // 更加方便的获取值方法
+    console.log(this.contactForm.value);
+    // console.log(this.contactForm.controls.firstName.value);
+    // console.log(this.contactForm.controls.lastName.value);
+    // console.log(this.contactForm.controls.dateOfBirth.value);
+    // console.log(this.contactForm.controls.favoritesRanking.value);
   }
 }
