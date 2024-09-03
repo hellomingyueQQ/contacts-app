@@ -2,7 +2,8 @@
   <h1 class="header">
     Edit Contact
   </h1>
-  <form [formGroup]="contactForm">
+  <!-- 目前这种方法，hit enter也能trigger saveContact，感觉不太对啊 -->
+  <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
     <section>
       <nav>Name/Info</nav>
       <div>
@@ -48,9 +49,12 @@
         </div>
       </div>
     </section>
+    <div class="buttons">
+      <button class="secondary">Cancel</button>
+      <!-- <button class="primary" (click)="saveContact()">Save</button> -->
+      <button type="submit" class="primary">Save</button>
+    </div>
+    <!-- 把button移入form，必须在form里面，否则不知道submit哪个form -->
   </form>
-  <div class="buttons">
-    <button class="secondary">Cancel</button>
-    <button class="primary" (click)="saveContact()">Save</button>
-  </div>
+
 </div>
