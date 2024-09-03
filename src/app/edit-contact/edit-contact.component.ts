@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { ContactsService } from '../contacts/contacts.service';
 
@@ -8,11 +8,15 @@ import { ContactsService } from '../contacts/contacts.service';
   styleUrls: ['./edit-contact.component.css'],
 })
 export class EditContactComponent implements OnInit {
-  // 1. form control给form element传递值，一般给intial value
-  firstName = new FormControl('Jim');
-  lastName = new FormControl();
-  dateOfBirth = new FormControl();
-  favoritesRanking = new FormControl();
+  // 这些form control是isolated，如果做form层级validation，需要formgroup
+  // formGroup更容易设置值，也更容易获取所有Form control的值
+  // 用formGroup可以实现form级别的validation，后面会讲
+  contactForm = new FormGroup({
+    firstName: new FormControl('Jim'),
+    lastName: new FormControl(),
+    dateOfBirth: new FormControl(),
+    favoritesRanking: new FormControl(),
+  });
 
   constructor(
     private route: ActivatedRoute,
@@ -20,28 +24,27 @@ export class EditContactComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    // 2. create form control之后，再给form control赋值
-    // 使用setValue
     const contactId = this.route.snapshot.params['id'];
     if (!contactId) return;
     this.contactService.getContact(contactId).subscribe((contact) => {
       if (!contact) {
         return;
       }
-      this.firstName.setValue(contact.firstName);
-      this.lastName.setValue(contact.lastName);
-      this.dateOfBirth.setValue(contact.dateOfBirth);
-      this.favoritesRanking.setValue(contact.favoritesRanking);
+      // 从formgroup的controls里面获取formcontrol，然后设置值
+      this.contactForm.controls.firstName.setValue(contact.firstName);
+      this.contactForm.controls.lastName.setValue(contact.lastName);
+      this.contactForm.controls.dateOfBirth.setValue(contact.dateOfBirth);
+      this.contactForm.controls.favoritesRanking.setValue(
+        contact.favoritesRanking
+      );
     });
   }
 
   saveContact() {
-    console.log(this.firstName.value);
-    console.log(this.lastName.value);
-    console.log(this.dateOfBirth.value);
-    console.log(this.favoritesRanking.value);
-    // if a user input value in the input element, then the control value will be set to that value
-    // reactive form is one-way binding
-    // angular tracks the values of those form controls
+    // 从formgroup的controls array里面获取formcontrol
+    console.log(this.contactForm.controls.firstName.value);
+    console.log(this.contactForm.controls.lastName.value);
+    console.log(this.contactForm.controls.dateOfBirth.value);
+    console.log(this.contactForm.controls.favoritesRanking.value);
   }
 }

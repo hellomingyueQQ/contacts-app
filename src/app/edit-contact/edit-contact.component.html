@@ -2,14 +2,17 @@
   <h1 class="header">
     Edit Contact
   </h1>
-  <form>
+  <form [formGroup]="contactForm">
     <section>
       <nav>Name/Info</nav>
       <div>
-        <input [formControl]="firstName" placeholder="First Name" />
-        <input [formControl]="lastName" placeholder="Last Name" />
-        <input [formControl]="dateOfBirth" placeholder="Date of Birth" />
-        <input [formControl]="favoritesRanking" placeholder="Favorites Ranking" />
+        <input formControlName="firstName" placeholder="First Name" />
+        <input formControlName="lastName" placeholder="Last Name" />
+        <input formControlName="dateOfBirth" placeholder="Date of Birth" />
+        <input formControlName="favoritesRanking" placeholder="Favorites Ranking" />
+        <!-- 因为现在firstName不再是property，而是contactForm属性了，绑定方式改变 -->
+        <!-- 不再使用formControl属性绑定， 使用formControlName属性赋值-->
+        <!-- 这个formControlName不能乱起，要对应 -->
       </div>
     </section>
     <section>
