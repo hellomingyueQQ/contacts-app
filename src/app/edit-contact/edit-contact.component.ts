@@ -10,10 +10,21 @@ import { ContactsService } from '../contacts/contacts.service';
 export class EditContactComponent implements OnInit {
   contactForm = new FormGroup({
     id: new FormControl(), // not bind to html template, but the id will be shown in this.contactForm.value
-    firstName: new FormControl(), // if FormControl is not initialized, then the type of firstName is any
+    firstName: new FormControl(), // Question: if FormControl is not initialized, then the type of firstName is any, is this okay?
     lastName: new FormControl(),
     dateOfBirth: new FormControl(),
     favoritesRanking: new FormControl(),
+    phone: new FormGroup({
+      phoneNumber: new FormControl(),
+      phoneType: new FormControl(),
+    }),
+    address: new FormGroup({
+      streetAddress: new FormControl(),
+      city: new FormControl(),
+      state: new FormControl(),
+      postalCode: new FormControl(),
+      addressType: new FormControl(),
+    }),
   });
 
   constructor(private route: ActivatedRoute, private contactService: ContactsService, private router: Router) {}
@@ -39,6 +50,10 @@ export class EditContactComponent implements OnInit {
     this.contactService.saveContact(this.contactForm.value).subscribe({
       next: () => this.router.navigate(['/contacts']),
     });
-    // Question: wire up address and phone by creating a new formgroup, why can not use the same formgroup?
+    // Wire up address and phone by creating a new formgroup, why can not use the same formgroup?
+    // 1. Use one formgroup cann't make contactForm.value have the same shape as Contact. the structure is flat
+    // 2. the fileds of address and phone needs their own validation. it's convenient to use formgroup
+
+    // hover "value" of "this.contactForm.value", you can get the real type of the value of the contactForm
   }
 }
