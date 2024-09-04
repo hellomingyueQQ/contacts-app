@@ -27,12 +27,16 @@ export class EditContactComponent implements OnInit {
     }),
   });
 
-  constructor(private route: ActivatedRoute, private contactService: ContactsService, private router: Router) {}
+  constructor(
+    private route: ActivatedRoute,
+    private contactService: ContactsService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     const contactId = this.route.snapshot.params['id'];
     if (!contactId) return;
-    this.contactService.getContact(contactId).subscribe(contact => {
+    this.contactService.getContact(contactId).subscribe((contact) => {
       if (!contact) {
         return;
       }
@@ -40,12 +44,15 @@ export class EditContactComponent implements OnInit {
       this.contactForm.controls.firstName.setValue(contact.firstName);
       this.contactForm.controls.lastName.setValue(contact.lastName);
       this.contactForm.controls.dateOfBirth.setValue(contact.dateOfBirth);
-      this.contactForm.controls.favoritesRanking.setValue(contact.favoritesRanking);
+      this.contactForm.controls.favoritesRanking.setValue(
+        contact.favoritesRanking
+      );
     });
   }
 
   saveContact() {
     console.log(this.contactForm.value);
+    console.log(this.contactForm.getRawValue());
 
     this.contactService.saveContact(this.contactForm.value).subscribe({
       next: () => this.router.navigate(['/contacts']),
