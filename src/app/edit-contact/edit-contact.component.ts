@@ -39,7 +39,6 @@ export class EditContactComponent implements OnInit {
     this.contactService.saveContact(this.contactForm.value).subscribe({
       next: () => this.router.navigate(['/contacts']),
     });
-    // Quesiton： the new edit should not in the favorite contacts and it should be in all contacts. how to fix it?
     // Question: wire up address and phone by creating a new formgroup, why can not use the same formgroup?
   }
 }
