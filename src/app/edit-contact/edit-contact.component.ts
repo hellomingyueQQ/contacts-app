@@ -26,6 +26,7 @@ export class EditContactComponent implements OnInit {
       addressType: new FormControl(),
     }),
   });
+  // 这里的问题是defining formgroup messy
 
   constructor(
     private route: ActivatedRoute,
@@ -47,14 +48,33 @@ export class EditContactComponent implements OnInit {
       this.contactForm.controls.favoritesRanking.setValue(
         contact.favoritesRanking
       );
+      this.contactForm.controls.phone.controls.phoneNumber.setValue(
+        contact.phone.phoneNumber
+      );
+      this.contactForm.controls.phone.controls.phoneType.setValue(
+        contact.phone.phoneType
+      );
+      this.contactForm.controls.address.controls.streetAddress.setValue(
+        contact.address.streetAddress
+      );
+      this.contactForm.controls.address.controls.city.setValue(
+        contact.address.city
+      );
+      this.contactForm.controls.address.controls.postalCode.setValue(
+        contact.address.postalCode
+      );
+      this.contactForm.controls.address.controls.state.setValue(
+        contact.address.state
+      );
+      this.contactForm.controls.address.controls.addressType.setValue(
+        contact.address.addressType
+      );
+      // 这里的问题是初始化formgroup messy
     });
   }
 
   saveContact() {
-    console.log(this.contactForm.value);
-    console.log(this.contactForm.getRawValue());
-
-    this.contactService.saveContact(this.contactForm.value).subscribe({
+    this.contactService.saveContact(this.contactForm.getRawValue()).subscribe({
       next: () => this.router.navigate(['/contacts']),
     });
     // Wire up address and phone by creating a new formgroup, why can not use the same formgroup?
@@ -62,5 +82,7 @@ export class EditContactComponent implements OnInit {
     // 2. the fileds of address and phone needs their own validation. it's convenient to use formgroup
 
     // hover "value" of "this.contactForm.value", you can get the real type of the value of the contactForm
+    // getRawValue() will return all values of the formgroup, so the  value of getRawValue() dose not contain partial type=> Good solution
+    // value will return the value which is not disabled or readonly and contains partial type
   }
 }
