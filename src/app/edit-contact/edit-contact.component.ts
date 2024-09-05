@@ -25,7 +25,7 @@ export class EditContactComponent implements OnInit {
     personal: false,
     firstName: '',
     lastName: '',
-    dateOfBirth: '', //如果仅为null，那么类型为null
+    dateOfBirth: <Date | null>null, //如果仅为null，那么类型为null
     favoritesRanking: <number | null>null, //类型只是帮助开发，真正的值类型是由ControlValueAccessor来决定
     phone: this.fb.nonNullable.group({
       phoneNumber: '',
