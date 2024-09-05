@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactsService } from '../contacts/contacts.service';
 import { first } from 'rxjs';
-import { phoneTypeValues } from '../contacts/contact.model';
+import { addressTypeValues, phoneTypeValues } from '../contacts/contact.model';
 
 @Component({
   templateUrl: './edit-contact.component.html',
@@ -11,6 +11,7 @@ import { phoneTypeValues } from '../contacts/contact.model';
 })
 export class EditContactComponent implements OnInit {
   phoneTypes = phoneTypeValues; //用于自动生成input:radio
+  addressTypes = addressTypeValues; //用于结合ngfor生成option
   // Question: if FormControl is not initialized, then the type of firstName is any, is this okay?
   // 类型最好匹配绑定数据的类型
   // 1. 使用generic 的类型，同时要给初始化值  new FormControl<string>(""),
