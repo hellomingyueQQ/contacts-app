@@ -66,7 +66,7 @@
       <div>
         <!-- 改变textarea状态用invalid，哪个validation错，都是一样的效果 -->
         <textarea [class.error]="notes.invalid" placeholder="Notes" rows="5" formControlName="notes"></textarea>
-        <em *ngIf="notes.errors?.['restrictedWords']">Restrictd words found</em>
+        <em *ngIf="notes.errors?.['restrictedWords']">Restrictd words found:{{notes.errors?.['restrictedWords']}}</em>
       </div>
     </section>
     <div class="buttons">
