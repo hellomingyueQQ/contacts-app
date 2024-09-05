@@ -25,7 +25,7 @@ export class EditContactComponent implements OnInit {
     personal: false,
     firstName: '',
     lastName: '',
-    dateOfBirth: <Date | null>null, //如果仅为null，那么类型为null
+    dateOfBirth: '', //如果仅为null，那么类型为null
     favoritesRanking: <number | null>null, //类型只是帮助开发，真正的值类型是由ControlValueAccessor来决定
     phone: this.fb.nonNullable.group({
       phoneNumber: '',
@@ -110,10 +110,7 @@ export class EditContactComponent implements OnInit {
   }
 
   saveContact() {
-    console.log(this.contactForm.value.favoritesRanking, typeof this.contactForm.value.favoritesRanking);
-    // 很奇怪，什么都不改，那就是number，如果修改了，在保存，就是string
-    // 因为input:text使用默认的ControlValueAccessor，使用string赋值，
-    // 解决办法是input:number,这样就用NumberValueAccessor
+    console.log(this.contactForm.value.dateOfBirth, typeof this.contactForm.value.dateOfBirth);
     this.contactService.saveContact(this.contactForm.getRawValue()).subscribe({
       next: () => this.router.navigate(['/contacts']),
     });
