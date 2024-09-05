@@ -2,41 +2,28 @@
   <h1 class="header">
     Edit Contact
   </h1>
-  <!-- 目前这种方法，hit enter也能trigger saveContact，感觉不太对啊 -->
   <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
     <section>
       <nav>Name/Info</nav>
       <div>
         <input formControlName="firstName" placeholder="First Name"
           [class.error]="firstName.invalid && firstName.touched" />
-        <!-- 出错的时候还可以给input添加效果 -->
-        <em *ngIf="firstName.invalid && firstName.touched">Please enter a First Name</em> //通过get方法简化
-        <!-- <em *ngIf=" contactForm.controls.firstName.invalid && contactForm.controls.firstName.touched">Please enter a First Name</em> -->
-
-        <!-- 目前的实现对edit可以，但是对create不行，还没开始编辑，就出现了error message  -->
-        <!-- 应该改为invalid && touched去验证 -->
-        <!-- 添加了touched之后，在edit过后，为空情况下，leave 那个input，就会出现error message，这点可能没有以前那么高效，全部删除了，不用leave，也有error message -->
+        <em *ngIf="firstName.errors?.['minlength'] && firstName.touched">First name must be at least 3 characters</em>
+        <em *ngIf="firstName.errors?.['required'] && firstName.touched">Please enter a First Name</em>
+        <!-- 多种validator -->
+        <!-- 实际用的时候，还很有逻辑，没有输入的时候required出现error，character就不出现 -->
         <input formControlName="lastName" placeholder="Last Name" />
         <input formControlName="dateOfBirth" type="date"
           [value]="contactForm.controls.dateOfBirth.value | date:'yyyy-MM-dd'" placeholder="Date of Birth" />
-        <!-- 不加date，不修改，save，是object，如果修改，则是string，因为用的是default value accessor -->
-        <!-- 加了type：date 还是不能正常显示e，warning The specified value "Sat Nov 08 1986 00:00:00 GMT+0800 (China Standard Time)" does not conform to the required format, "yyyy-MM-dd". -->
-        <!-- 通过[value]结合pipe可以正常显示，但是保存还是string，不是date -->
         <div>
           <span>Favorites Ranking</span>
           <input type="range" min="0" max="5" formControlName="favoritesRanking" placeholder="Favorites Ranking" />
           <span>{{contactForm.controls.favoritesRanking.value}}</span>
         </div>
 
-        <!-- 现在用的是RangeValueAccessor -->
         <div>
           <input type="checkbox" formControlName="personal">Personal
-          <!-- 即便给input:checkbox添加value=“test” 也不会影响， -->
-          <!-- ControlValueAccessor  CheckboxControlValueAccessor-->
         </div>
-        <!-- 因为现在firstName不再是property，而是contactForm属性了，绑定方式改变 -->
-        <!-- 不再使用formControl属性绑定， 使用formControlName属性赋值-->
-        <!-- 这个formControlName不能乱起，要对应 -->
       </div>
     </section>
     <section>
@@ -47,16 +34,10 @@
           <img src="/assets/plus-grey-blue.png" class="add" />
         </div>
         <div class="radio">
-          <!-- 通过ngfor自动生成多个input:radio -->
           <span *ngFor="let phoneType of phoneTypes">
-            <!-- add a whitespace before phoneType.title. it will be a space between radio and title -->
-            <!-- 为了实现title的获取，必须包一层span，否则拿不到数据 -->
             <input type="radio" [value]="phoneType.value" formControlName="phoneType"> {{phoneType.title}}
           </span>
         </div>
-        <!-- radio button, every option should contain formControlName -->
-        <!-- formControlName can make many input:radio as a group， mutually exclusive -->
-        <!-- this is similar to name attribute for mutually exclusive -->
       </div>
     </section>
     <section>
@@ -84,10 +65,8 @@
     </section>
     <div class="buttons">
       <button class="secondary">Cancel</button>
-      <!-- <button class="primary" (click)="saveContact()">Save</button> -->
       <button type="submit" class="primary">Save</button>
     </div>
-    <!-- 把button移入form，必须在form里面，否则不知道submit哪个form -->
   </form>
 
 </div>
