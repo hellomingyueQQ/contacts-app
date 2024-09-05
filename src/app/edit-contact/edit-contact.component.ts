@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactsService } from '../contacts/contacts.service';
 import { first } from 'rxjs';
@@ -23,7 +23,7 @@ export class EditContactComponent implements OnInit {
   contactForm = this.fb.nonNullable.group({
     id: '',
     personal: false,
-    firstName: '',
+    firstName: ['', Validators.required], //new FormControl('', Validators.required),这是不用formbuilde的作法
     lastName: '',
     dateOfBirth: <Date | null>null, //如果仅为null，那么类型为null
     favoritesRanking: <number | null>null, //类型只是帮助开发，真正的值类型是由ControlValueAccessor来决定

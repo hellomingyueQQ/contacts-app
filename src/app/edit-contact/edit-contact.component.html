@@ -8,6 +8,8 @@
       <nav>Name/Info</nav>
       <div>
         <input formControlName="firstName" placeholder="First Name" />
+        {{contactForm.controls.firstName.valid}}
+        <!-- 获取单个formcontrol的validation result，小技巧，不用那个放元素，用interpolation，非常好的验证技巧 -->
         <input formControlName="lastName" placeholder="Last Name" />
         <input formControlName="dateOfBirth" type="date"
           [value]="contactForm.controls.dateOfBirth.value | date:'yyyy-MM-dd'" placeholder="Date of Birth" />
