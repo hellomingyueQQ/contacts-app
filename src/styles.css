@@ -5,6 +5,7 @@
   --color-secondary: #aaa;
   --color-secondary-light: #ccc;
   --color-error: #B22222;
+  /* 这里还有使用变量的例子，great，这个知识不懂，回头血 */
   --color-disabled-error: #F88888;
 }
 

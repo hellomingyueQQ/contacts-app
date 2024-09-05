@@ -109,6 +109,11 @@ export class EditContactComponent implements OnInit {
     });
   }
 
+  get firstName() {
+    // 这样写可以简化html中访问firstName的表达式的长度
+    return this.contactForm.controls.firstName;
+  }
+
   saveContact() {
     console.log(this.contactForm.value.dateOfBirth, typeof this.contactForm.value.dateOfBirth);
     this.contactService.saveContact(this.contactForm.getRawValue()).subscribe({

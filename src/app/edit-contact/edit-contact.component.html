@@ -7,9 +7,15 @@
     <section>
       <nav>Name/Info</nav>
       <div>
-        <input formControlName="firstName" placeholder="First Name" />
-        {{contactForm.controls.firstName.valid}}
-        <!-- 获取单个formcontrol的validation result，小技巧，不用那个放元素，用interpolation，非常好的验证技巧 -->
+        <input formControlName="firstName" placeholder="First Name"
+          [class.error]="firstName.invalid && firstName.touched" />
+        <!-- 出错的时候还可以给input添加效果 -->
+        <em *ngIf="firstName.invalid && firstName.touched">Please enter a First Name</em> //通过get方法简化
+        <!-- <em *ngIf=" contactForm.controls.firstName.invalid && contactForm.controls.firstName.touched">Please enter a First Name</em> -->
+
+        <!-- 目前的实现对edit可以，但是对create不行，还没开始编辑，就出现了error message  -->
+        <!-- 应该改为invalid && touched去验证 -->
+        <!-- 添加了touched之后，在edit过后，为空情况下，leave 那个input，就会出现error message，这点可能没有以前那么高效，全部删除了，不用leave，也有error message -->
         <input formControlName="lastName" placeholder="Last Name" />
         <input formControlName="dateOfBirth" type="date"
           [value]="contactForm.controls.dateOfBirth.value | date:'yyyy-MM-dd'" placeholder="Date of Birth" />
