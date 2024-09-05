@@ -24,12 +24,15 @@
           <img src="/assets/plus-grey-blue.png" class="add" />
         </div>
         <div class="radio">
-          <input type="radio" value="mobile" formControlName="phoneType"> Mobile
-          <input type="radio" value="work" formControlName="phoneType"> Work
-          <input type="radio" value="other" formControlName="phoneType"> Other
+          <!-- 通过ngfor自动生成多个input:radio -->
+          <span *ngFor="let phoneType of phoneTypes">
+            <!-- add a whitespace before phoneType.title. it will be a space between radio and title -->
+            <input type="radio" [value]="phoneType.value" formControlName="phoneType"> {{phoneType.title}}
+          </span>
         </div>
-        <!-- radio button, every option includes formControlName -->
-        <!-- formControlName can make many input:radio as a group， 彼此互斥 -->
+        <!-- radio button, every option should contain formControlName -->
+        <!-- formControlName can make many input:radio as a group， mutually exclusive -->
+        <!-- this is similar to name attribute for mutually exclusive -->
       </div>
     </section>
     <section>
