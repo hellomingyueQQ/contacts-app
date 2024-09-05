@@ -22,6 +22,7 @@ export class EditContactComponent implements OnInit {
   // 下面的group是nullable的写法，如果是not nullable的写法：this.fb.nonNullable.group
   contactForm = this.fb.nonNullable.group({
     id: '',
+    personal: false,
     firstName: '',
     lastName: '',
     dateOfBirth: <Date | null>null, //如果仅为null，那么类型为null
@@ -108,6 +109,11 @@ export class EditContactComponent implements OnInit {
   }
 
   saveContact() {
+    // print the value and the value type
+    // there are two ways to get the value
+    console.log(this.contactForm.controls.personal.value, typeof this.contactForm.controls.personal.value);
+    console.log(this.contactForm.value.personal, typeof this.contactForm.value.personal);
+
     this.contactService.saveContact(this.contactForm.getRawValue()).subscribe({
       next: () => this.router.navigate(['/contacts']),
     });

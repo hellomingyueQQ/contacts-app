@@ -11,6 +11,11 @@
         <input formControlName="lastName" placeholder="Last Name" />
         <input formControlName="dateOfBirth" placeholder="Date of Birth" />
         <input formControlName="favoritesRanking" placeholder="Favorites Ranking" />
+        <div>
+          <input type="checkbox" formControlName="personal">Personal
+          <!-- 即便给input:checkbox添加value=“test” 也不会影响， -->
+          <!-- ControlValueAccessor  CheckboxControlValueAccessor-->
+        </div>
         <!-- 因为现在firstName不再是property，而是contactForm属性了，绑定方式改变 -->
         <!-- 不再使用formControl属性绑定， 使用formControlName属性赋值-->
         <!-- 这个formControlName不能乱起，要对应 -->
