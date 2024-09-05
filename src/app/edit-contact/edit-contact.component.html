@@ -10,7 +10,13 @@
         <input formControlName="firstName" placeholder="First Name" />
         <input formControlName="lastName" placeholder="Last Name" />
         <input formControlName="dateOfBirth" placeholder="Date of Birth" />
-        <input type="number" formControlName="favoritesRanking" placeholder="Favorites Ranking" />
+        <div>
+          <span>Favorites Ranking</span>
+          <input type="range" min="0" max="5" formControlName="favoritesRanking" placeholder="Favorites Ranking" />
+          <span>{{contactForm.controls.favoritesRanking.value}}</span>
+        </div>
+
+        <!-- 现在用的是RangeValueAccessor -->
         <div>
           <input type="checkbox" formControlName="personal">Personal
           <!-- 即便给input:checkbox添加value=“test” 也不会影响， -->
