@@ -9,9 +9,10 @@ import { ContactListComponent } from './contact-list/contact-list.component';
 import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { InMemoryContactsApi } from './contacts/in-memory-contacts.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DataValueAccessorDirective } from './date-value-accessor/data-value-accessor.directive';
 
 @NgModule({
-  declarations: [AppComponent, ContactListComponent, EditContactComponent],
+  declarations: [AppComponent, ContactListComponent, EditContactComponent, DataValueAccessorDirective],
   imports: [
     ReactiveFormsModule,//使用reactive form第一步
     BrowserModule,

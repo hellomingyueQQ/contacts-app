@@ -13,6 +13,11 @@ export class ContactsService {
   getContact(id: string): Observable<Contact | undefined> {
     return this.http.get<Contact>(`api/contacts/${id}`).pipe(
       map(c => {
+        // console.log(c, typeof c.dateOfBirth);
+        // dateOfBirth is string. 这里转了一道变为Date了
+        // 前端用value属性和date pipe进行了转换
+        // 但是还是有warning
+
         const dob = c.dateOfBirth ? new Date(c.dateOfBirth) : null;
         return { ...c, dateOfBirth: dob };
       })

@@ -67,6 +67,7 @@ export class EditContactComponent implements OnInit {
 
   saveContact() {
     console.log(this.contactForm.value.dateOfBirth, typeof this.contactForm.value.dateOfBirth);
+    // save的依然是string，不是object
     this.contactService.saveContact(this.contactForm.getRawValue()).subscribe({
       next: () => this.router.navigate(['/contacts']),
     });
