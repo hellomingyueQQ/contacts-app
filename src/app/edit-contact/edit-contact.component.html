@@ -43,7 +43,8 @@
     <section>
       <nav>Address</nav>
       <div>
-        <div class="address" formGroupName="address">
+        <div class="address" formGroupName="address"
+          [class.error]="contactForm.controls.address.invalid && contactForm.controls.address.dirty">
           <div class="flex-group">
             <input placeholder="Address" formControlName="streetAddress" />
             <img src="/assets/plus-grey-blue.png" class="add" />
@@ -55,6 +56,9 @@
             <option *ngFor="let addressType of addressTypes" [value]="addressType.value">{{addressType.title}}</option>
           </select>
         </div>
+        <em *ngIf="contactForm.controls.address.invalid && contactForm.controls.address.dirty">Incomplete Address</em>
+        <!-- 进入没输入，再跳到下个input，touch会报错，dirty不会 -->
+        <!-- 输入的时候，dirty会立即报错，touch不会，得到下一个input，才会 -->
       </div>
     </section>
     <section>
@@ -65,7 +69,7 @@
     </section>
     <div class="buttons">
       <button class="secondary">Cancel</button>
-      <button type="submit" class="primary">Save</button>
+      <button type="submit" class="primary" [disabled]="contactForm.invalid">Save</button>
     </div>
   </form>
 
