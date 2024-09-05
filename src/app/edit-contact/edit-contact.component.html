@@ -27,6 +27,7 @@
           <!-- 通过ngfor自动生成多个input:radio -->
           <span *ngFor="let phoneType of phoneTypes">
             <!-- add a whitespace before phoneType.title. it will be a space between radio and title -->
+            <!-- 为了实现title的获取，必须包一层span，否则拿不到数据 -->
             <input type="radio" [value]="phoneType.value" formControlName="phoneType"> {{phoneType.title}}
           </span>
         </div>
