@@ -38,6 +38,7 @@ export class EditContactComponent implements OnInit {
       postalCode: '',
       addressType: '',
     }),
+    notes: '',
   });
   // 这里的问题是defining formgroup messy
 

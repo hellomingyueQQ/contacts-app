@@ -1,12 +1,13 @@
 export interface Contact {
   id: string;
-  personal:boolean;
+  personal: boolean;
   firstName: string;
   lastName: string;
   dateOfBirth: Date | null;
   favoritesRanking: number | null;
   phone: Phone;
   address: Address;
+  notes: string;
 }
 
 export interface Phone {
