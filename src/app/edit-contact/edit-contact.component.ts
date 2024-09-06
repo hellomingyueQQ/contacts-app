@@ -104,6 +104,7 @@ export class EditContactComponent implements OnInit {
         }
         phoneGroup.controls.phoneNumber.updateValueAndValidity();
         // 有可能造成循环，updateValueAndValidity导致valueChanges
+        // trigger update vlaue， 但是没有值进一步改变，需要distinctUntilChanged打破循环
       });
 
     return phoneGroup;
