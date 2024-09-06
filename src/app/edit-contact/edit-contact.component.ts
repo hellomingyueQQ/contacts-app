@@ -55,10 +55,15 @@ export class EditContactComponent implements OnInit {
   }
 
   createPhoneGroup() {
-    return this.fb.nonNullable.group({
+    const phoneGroup = this.fb.nonNullable.group({
       phoneNumber: '',
       phoneType: '',
+      preferred: false,
     });
+    // formControl都有valuechanges, 这个定义的非常有针对性，不是更上一层
+    phoneGroup.controls.preferred.valueChanges.subscribe(value => {});
+
+    return phoneGroup;
   }
 
   addPhone() {
