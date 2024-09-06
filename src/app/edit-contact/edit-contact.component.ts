@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ContactsService } from '../contacts/contacts.service';
-import { distinctUntilChanged, first } from 'rxjs';
+import { debounceTime, distinctUntilChanged, first } from 'rxjs';
 import { addressTypeValues, phoneTypeValues } from '../contacts/contact.model';
 import { restrictedWords } from '../validators/restricted-words.validators';
 
@@ -44,6 +44,7 @@ export class EditContactComponent implements OnInit {
     if (!contactId) return;
     this.contactService.getContact(contactId).subscribe(contact => {
       if (!contact) {
+        this.subscribeToAddressChanges();
         return;
       }
       // 这里需要给除了phone的第一个元素外，创建formGroup壳子
@@ -51,9 +52,28 @@ export class EditContactComponent implements OnInit {
         this.addPhone();
       }
       this.contactForm.setValue(contact);
+      this.subscribeToAddressChanges();
     });
   }
 
+  subscribeToAddressChanges() {
+    const addressGroup = this.contactForm.controls.address;
+    addressGroup.valueChanges.pipe(distinctUntilChanged(this.stringCompare)).subscribe(() => {
+      for (const controlName in addressGroup.controls) {
+        addressGroup.get(controlName)?.removeValidators([Validators.required]);
+        addressGroup.get(controlName)?.updateValueAndValidity();
+      }
+    });
+
+    // 安静两分钟后，emit the values
+    addressGroup.valueChanges.pipe(debounceTime(2000), distinctUntilChanged(this.stringCompare)).subscribe(() => {
+      for (const controlName in addressGroup.controls) {
+        addressGroup.get(controlName)?.addValidators([Validators.required]);
+        addressGroup.get(controlName)?.updateValueAndValidity();
+      }
+    });
+    // 综合效果就是input哪个，error都会小时，静止2分钟后，再出现error message
+  }
   stringCompare(a: any, b: any) {
     return JSON.stringify(a) === JSON.stringify(b);
   }

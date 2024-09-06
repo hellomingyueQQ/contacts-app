@@ -33,3 +33,11 @@ requiredTrue 主要应用于给 Checkbox
 <img src="G:\DumpCodes\My contacts-app\images\image-20240906131407944.png" alt="image-20240906131407944" style="zoom: 50%;" />
 
 <img src="G:\DumpCodes\My contacts-app\images\image-20240906131450384.png" alt="image-20240906131450384" style="zoom:50%;" />
+
+这节课讲的是Address
+
+address添加，刚开始编辑一个字段，addressgroup就开始显示error message
+
+![image-20240906151706094](G:\DumpCodes\My contacts-app\images\image-20240906151706094.png)
+
+输入的时候不要添加error，停止的时候，可以显示
