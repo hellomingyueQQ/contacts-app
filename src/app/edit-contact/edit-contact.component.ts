@@ -59,8 +59,10 @@ export class EditContactComponent implements OnInit {
   subscribeToAddressChanges() {
     const addressGroup = this.contactForm.controls.address;
     addressGroup.valueChanges.pipe(distinctUntilChanged(this.stringCompare)).subscribe(() => {
+      // 这样是loop出control的名字属性名
       for (const controlName in addressGroup.controls) {
         addressGroup.get(controlName)?.removeValidators([Validators.required]);
+        // 用controlname获取control
         addressGroup.get(controlName)?.updateValueAndValidity();
       }
     });
