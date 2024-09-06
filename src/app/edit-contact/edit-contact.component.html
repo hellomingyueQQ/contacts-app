@@ -13,8 +13,7 @@
         <!-- 多种validator -->
         <!-- 实际用的时候，还很有逻辑，没有输入的时候required出现error，character就不出现 -->
         <input formControlName="lastName" placeholder="Last Name" />
-        <input formControlName="dateOfBirth" type="date"
-          [value]="contactForm.controls.dateOfBirth.value | date:'yyyy-MM-dd'" placeholder="Date of Birth" />
+        <input formControlName="dateOfBirth" type="date" placeholder="Date of Birth" />
         <div>
           <span>Favorites Ranking</span>
           <input type="range" min="0" max="5" formControlName="favoritesRanking" placeholder="Favorites Ranking" />
