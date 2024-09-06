@@ -27,16 +27,20 @@
       </div>
     </section>
     <section>
-      <nav>Phone</nav>
-      <div formGroupName="phone" class="flex-column">
-        <div class="flex-group">
-          <input placeholder="Phone" formControlName="phoneNumber" />
-          <img src="/assets/plus-grey-blue.png" class="add" />
-        </div>
-        <div class="radio">
-          <span *ngFor="let phoneType of phoneTypes">
-            <input type="radio" [value]="phoneType.value" formControlName="phoneType"> {{phoneType.title}}
-          </span>
+      <nav>Phones</nav>
+      <div formArrayName="phones">
+        <div formGroupName="0" class="flex-column">
+          <!-- formarray中的group绑定方法 -->
+          <div class="flex-group">
+            <input placeholder="Phone" formControlName="phoneNumber" />
+            <img src="/assets/plus-grey-blue.png" class="add" />
+          </div>
+          <div class="radio">
+            <span *ngFor="let phoneType of phoneTypes">
+              <input type="radio" [value]="phoneType.value" formControlName="phoneType"> {{phoneType.title}}
+            </span>
+          </div>
+
         </div>
       </div>
     </section>

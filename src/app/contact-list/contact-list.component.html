@@ -19,7 +19,8 @@
       <ng-container *ngIf="favoriteContacts.length > 0">
         <tr *ngFor="let contact of favoriteContacts" [routerLink]="['/contacts/edit', contact.id]">
           <td>{{contact.firstName}} {{contact.lastName}}</td>
-          <td><span *ngIf="contact.phone">{{contact.phone.phoneNumber}}</span></td>
+          <td><span *ngIf="contact.phones[0]">{{contact.phones[0].phoneNumber}}</span></td>
+          <!-- 这里不是访问单个formGroup了，而是多个了 -->
           <td *ngIf="contact.address">
             {{contact.address.streetAddress}}, {{contact.address.city}},
             {{contact.address.state}},
@@ -45,7 +46,7 @@
       <ng-container *ngIf="contacts.length > 0">
         <tr *ngFor="let contact of contacts" [routerLink]="['/contacts/edit', contact.id]">
           <td>{{contact.firstName}} {{contact.lastName}}</td>
-          <td><span *ngIf="contact.phone">{{contact.phone.phoneNumber}}</span></td>
+          <td><span *ngIf="contact.phones[0]">{{contact.phones[0].phoneNumber}}</span></td>
           <td *ngIf="contact.address">
             {{contact.address.streetAddress}}, {{contact.address.city}},
             {{contact.address.state}},
@@ -53,6 +54,7 @@
           </td>
         </tr>
       </ng-container>
+      <!-- ng-container只是用来添加ngif这个，但是不产生div，这个方便啊，以后多用用，看怎么用好 -->
     </tbody>
   </table>
 </div>

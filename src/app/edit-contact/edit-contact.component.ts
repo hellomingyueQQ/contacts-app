@@ -21,10 +21,7 @@ export class EditContactComponent implements OnInit {
     lastName: '',
     dateOfBirth: <Date | null>null,
     favoritesRanking: <number | null>null,
-    phone: this.fb.nonNullable.group({
-      phoneNumber: '',
-      phoneType: '',
-    }),
+    phones: this.fb.array([this.createPhoneGroup()]), //formarray初始化的方法
     address: this.fb.nonNullable.group({
       streetAddress: ['', Validators.required],
       city: ['', Validators.required],
@@ -55,6 +52,13 @@ export class EditContactComponent implements OnInit {
         lastName: contact.lastName,
       };
       this.contactForm.patchValue(names);
+    });
+  }
+
+  createPhoneGroup() {
+    return this.fb.nonNullable.group({
+      phoneNumber: '',
+      phoneType: '',
     });
   }
 
