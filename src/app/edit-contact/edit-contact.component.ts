@@ -44,6 +44,7 @@ export class EditContactComponent implements OnInit {
     if (!contactId) return;
     this.contactService.getContact(contactId).subscribe(contact => {
       if (!contact) {
+        // 新的contact也需要subscribe
         this.subscribeToAddressChanges();
         return;
       }
