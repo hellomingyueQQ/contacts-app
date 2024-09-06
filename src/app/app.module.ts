@@ -10,11 +10,18 @@ import { EditContactComponent } from './edit-contact/edit-contact.component';
 import { InMemoryContactsApi } from './contacts/in-memory-contacts.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataValueAccessorDirective } from './date-value-accessor/data-value-accessor.directive';
+import { ProfileIconSelectorComponent } from './profile-icon-selector/profile-icon-selector.component';
 
 @NgModule({
-  declarations: [AppComponent, ContactListComponent, EditContactComponent, DataValueAccessorDirective],
+  declarations: [
+    AppComponent,
+    ContactListComponent,
+    EditContactComponent,
+    DataValueAccessorDirective,
+    ProfileIconSelectorComponent,
+  ],
   imports: [
-    ReactiveFormsModule,//使用reactive form第一步
+    ReactiveFormsModule, //使用reactive form第一步
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
