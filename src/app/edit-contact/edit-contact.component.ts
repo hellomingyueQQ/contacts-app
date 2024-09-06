@@ -46,12 +46,11 @@ export class EditContactComponent implements OnInit {
       if (!contact) {
         return;
       }
+      // 这里需要给除了phone的第一个元素外，创建formGroup壳子
+      for (let i = 1; i < contact.phones.length; i++) {
+        this.addPhone();
+      }
       this.contactForm.setValue(contact);
-      const names = {
-        firstName: contact.firstName,
-        lastName: contact.lastName,
-      };
-      this.contactForm.patchValue(names);
     });
   }
 
@@ -60,6 +59,11 @@ export class EditContactComponent implements OnInit {
       phoneNumber: '',
       phoneType: '',
     });
+  }
+
+  addPhone() {
+    // 创建新的phone，先创建壳子
+    this.contactForm.controls.phones.push(this.createPhoneGroup());
   }
 
   get firstName() {

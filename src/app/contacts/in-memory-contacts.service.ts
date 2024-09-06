@@ -48,7 +48,10 @@ export class InMemoryContactsApi implements InMemoryDbService {
         lastName: 'Giggleworth',
         dateOfBirth: new Date('1986/11/08'),
         favoritesRanking: 1,
-        phones: [{ phoneNumber: '555-123-4567', phoneType: 'mobile' }],
+        phones: [
+          { phoneNumber: '555-123-4567', phoneType: 'mobile' },
+          { phoneNumber: '555-321-9999', phoneType: 'mobile' },
+        ],
         address: {
           streetAddress: '123 Merriment Avenue',
           city: 'Dorado City',
