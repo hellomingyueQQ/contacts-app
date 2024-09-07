@@ -10,6 +10,7 @@
           [class.error]="firstName.invalid && firstName.touched" />
         <em *ngIf="firstName.errors?.['minlength'] && firstName.touched">First name must be at least 3 characters</em>
         <em *ngIf="firstName.errors?.['required'] && firstName.touched">Please enter a First Name</em>
+        <!-- 方括号的写法可能受制于angular 16版本，18版本，直接写成?.minlength -->
         <!-- 多种validator -->
         <!-- 实际用的时候，还很有逻辑，没有输入的时候required出现error，character就不出现 -->
         <input formControlName="lastName" placeholder="Last Name" />
